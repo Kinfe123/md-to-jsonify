@@ -74,21 +74,23 @@ for (eachCol of theRest) {
   for (eachVal of current_parsed) {
     let currentKey = headers[counter];
 
-    currentObj[currentKey] = eachVal;
+  
     if (eachVal.includes(linkFlag[0]) || eachVal.includes(linkFlag[1])) {
       if (!currentObj["Website"]) {
         let openIdx = eachVal.indexOf("(");
         let openSquareIdx = eachVal.indexOf("[");
         let closeIdx = eachVal.indexOf(")");
-        let closeSquareIdx = eachVal.indexOf("[");
+        let closeSquareIdx = eachVal.indexOf("]");
 
         let parsedLink = eachVal.slice(openIdx + 1, closeIdx);
         let parsedLinkHelper = eachVal.slice(openSquareIdx + 1, closeSquareIdx);
         console.log(parsedLink, parsedLinkHelper);
         currentObj["link"] = parsedLink;
-        currentObj["linkhelper"] = parsedLinkHelper;
+        currentObj[currentKey]= parsedLinkHelper;
       }
-      console.log("I FOUND OEN: ", eachVal);
+    
+    }else {
+      currentObj[currentKey] = eachVal;
     }
     counter += 1;
 
@@ -96,7 +98,7 @@ for (eachCol of theRest) {
   }
 }
 
-console.log("The result is: ", result);
+console.log("The result is: ", result[0]['Founded Year']);
 
 const url =
   "https://api.github.com/repos/workos/awesome-developer-experience/git/blobs/fe28415d2d46ac325a12df8292f7cc005aef57ce";
