@@ -63,7 +63,7 @@ const test = "[Alice's Website](https://example.com/alice)";
 
 const linkFlag = ["https://", "http://"];
 
-const websiteIdx = headers.indexOf("Website");
+// const websiteIdx = headers.indexOf("Website");
 
 for (eachCol of theRest) {
   let current_parsed = headerParser(eachCol);
@@ -73,20 +73,20 @@ for (eachCol of theRest) {
 
   for (eachVal of current_parsed) {
     let currentKey = headers[counter];
-    if (counter !== websiteIdx) {
-      currentObj[currentKey] = eachVal;
-    }
 
-    if (
-      websiteIdx === counter &&
-      (eachVal.includes(linkFlag[0]) || eachVal.includes(linkFlag[1]))
-    ) {
+    currentObj[currentKey] = eachVal;
+    if (eachVal.includes(linkFlag[0]) || eachVal.includes(linkFlag[1])) {
       if (!currentObj["Website"]) {
         let openIdx = eachVal.indexOf("(");
+        let openSquareIdx = eachVal.indexOf("[");
         let closeIdx = eachVal.indexOf(")");
-        let parsedLink = eachVal.slice(openIdx + 1, closeIdx);
+        let closeSquareIdx = eachVal.indexOf("[");
 
-        currentObj["Website"] = parsedLink;
+        let parsedLink = eachVal.slice(openIdx + 1, closeIdx);
+        let parsedLinkHelper = eachVal.slice(openSquareIdx + 1, closeSquareIdx);
+        console.log(parsedLink, parsedLinkHelper);
+        currentObj["link"] = parsedLink;
+        currentObj["linkhelper"] = parsedLinkHelper;
       }
       console.log("I FOUND OEN: ", eachVal);
     }
@@ -112,10 +112,7 @@ fetch(url)
 
     const firstPipe = binaryString.indexOf("|");
     let title = "";
-     // this is the trail implementatation for finding the title of the mdx content
-      
-
-
+    // this is the trail implementatation for finding the title of the mdx content
 
     // for (let i = firstPipe - 2; i >= 0; i++) {
     //   let currentChar = binaryString[i];
