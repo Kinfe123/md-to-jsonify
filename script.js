@@ -13,21 +13,25 @@ const eachRow = trimmed.split('\n')
 
 
 const headerParser = (row) => {
-  return row[0].split('|').map((r) => r.trim()).filter(r => r!=='')
+  return row.split('|').map((r) => r.trim()).filter(r => r!=='')
 
 }
 
 
 
-const headers = headerParser(eachRow)
+const headers = headerParser(eachRow[0])
 
 
 const theRest = eachRow.slice(2 , eachRow.length)
  
+console.log('THe rest of it : ' , theRest)
 
 
 const linkFlag = ['https://' , 'http://']
+
 for(eachCol of theRest) {
+  
+
   let current_parsed = headerParser(eachCol)
   for(eachVal of eachCol) {
      if(eachVal.includes(linkFlag[0]) || eachVal.includes(linkFlag[1])) {
