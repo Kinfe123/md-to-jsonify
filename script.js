@@ -23,8 +23,6 @@ const headers = headerParser(eachRow[0])
 
 
 const theRest = eachRow.slice(2 , eachRow.length)
- 
-console.log('THe rest of it : ' , theRest)
 
 
 const linkFlag = ['https://' , 'http://']
