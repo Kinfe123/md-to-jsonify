@@ -1,3 +1,4 @@
+
 const tableMarkdown = `
 
 
@@ -40,9 +41,7 @@ const tableMarkdown = `
 | [WorkOS](https://workos.com)           | WorkOS provides APIs to make applications enterprise-ready.                                                 | 2018         |
 
 
-`;
-
-// this will be for mocking the api blob response from readme file
+`
 
 const result = [];
 const trimmed = tableMarkdown.trim();
@@ -110,30 +109,32 @@ fetch(url)
     // Decode the Base64 content into a binary string
     const binaryString = atob(content);
 
-    const firstPipe = binaryString.indexOf("|");
-    let title = "";
-     // this is the trail implementatation for finding the title of the mdx content
+    const firstPipe = binaryString.indexOf('|')
+    let title = ''
+    
+    for(let i = firstPipe - 2; i>=0; i++){
+      let currentChar = binaryString[i]
+      if(currentChar) {
+         let c = i;
+         
+         while(binaryString[c] !== '') {
+          title+=binaryString[c];
+          console.log("Findinf the title : " , title)
+          c-=1;
+          if(binaryString[c] === '') {
+            break
+          }
+
+
+         }
+         
+        
+         
+      }
       
-
-
-
-    // for (let i = firstPipe - 2; i >= 0; i++) {
-    //   let currentChar = binaryString[i];
-    //   if (currentChar) {
-    //     let c = i;
-
-    //     while (binaryString[c] !== "") {
-    //       title += binaryString[c];
-    //       console.log("Findinf the title : ", title);
-    //       c -= 1;
-    //       if (binaryString[c] === "") {
-    //         break;
-    //       }
-    //     }
-    //   }
-    // }
-    const lineBefore = binaryString.slice(firstPipe - 2, binaryString.length);
-    console.log("The binary data: ", title);
+    }
+    const lineBefore = binaryString.slice((firstPipe - 2)  , binaryString.length)  
+    console.log('The binary data: ' , title)
 
     const trimmedTableMarkdown = binaryString.trim();
 
