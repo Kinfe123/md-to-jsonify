@@ -33,7 +33,6 @@ for (eachCol of theRest) {
   let currentObj = {};
 
   for (eachVal of current_parsed) {
-    console.log("THe value is : ", eachVal, " and the num is : ", counter);
     let currentKey = headers[counter];
     if (counter !== websiteIdx) {
       currentObj[currentKey] = eachVal;
