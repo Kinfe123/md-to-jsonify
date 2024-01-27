@@ -42,194 +42,167 @@ const tableMarkdown = `
 
 `;
 
-const anotherTableMarkdown = `
-
-| Title                                                                                  | Presenter         | Duration | Date       |
-| -------------------------------------------------------------------------------------- | ----------------- | -------- | ---------- |
-| [The Next Generation of Developer-First Products](https://youtu.be/ja-Pr58FCIQ)                                    | Zeno Rocha     | 43:41    | 5/5/2022   |
-| [Building DevX Teams](https://youtu.be/xX5zeVy8Ta4)                                    | Cirpo Cinelli     | 42:04    | 5/5/2022   |
-| [Things nobody told you about developer experience (DX)](https://youtu.be/gqnWoh8o36M) | DX Doctor         | 17:02    | 11/23/2019 |
-| [The only way how to have happy & productive developers](https://youtu.be/X4NSLo97Az8) | Vratislav Kalenda | 25:18    | 12/8/2018  |
-| [The Seven Deadly Sins of Developer Onboarding](https://youtu.be/JHtMN8TxUfc)          | Cristiano Betta   | 28:03    | 11/13/2017 |
-| [JS UX: Writing code for humans(DX)](https://youtu.be/loj3CLHovt0)                         | Lea Verou         | 1:09:04  | 9/26/2016  |
-| [The Elements of Developer Experience Design](https://youtu.be/lQdeWHPgoMs)       | Stephen Boak      | 5:24     | 8/4/2016   |
-
-
-
-
-`;
-// this will be for mocking the api blob response from readme file
-
-const result = [];
-const trimmed = anotherTableMarkdown.trim();
-const eachRow = trimmed.split("\n");
-
-const headerParser = (row) => {
-  return row
-    .split("|")
-    .map((r) => r.trim())
-    .filter((r) => r !== "");
-};
-
-const headers = headerParser(eachRow[0]);
-
-const theRest = eachRow.slice(2, eachRow.length);
-
-const test = "[Alice's Website](https://example.com/alice)";
-
-const linkFlag = ["https://", "http://"];
-
-// const websiteIdx = headers.indexOf("Website");
-
-for (eachCol of theRest) {
-  let current_parsed = headerParser(eachCol);
  
-  let counter = 0;
-  let currentObj = {};
 
-  for (eachVal of current_parsed) {
-    let currentKey = headers[counter];
-
-    if (eachVal.includes(linkFlag[0]) || eachVal.includes(linkFlag[1])) {
-      let openSquareIdx = eachVal.indexOf("[");
-      let closeSquareIdx = eachVal.indexOf("]");
-      const add = (eachVal.length - closeSquareIdx)
-      let openIdx = eachVal.slice(closeSquareIdx , eachVal.length).indexOf("(") + closeSquareIdx;
-      let closeIdx = eachVal.slice(closeSquareIdx , eachVal.length).indexOf(")") + closeSquareIdx;
-      // we have to identify the link even if there exit () in link helper
-        
-
-      let parsedLink = eachVal.slice(openIdx + 1, closeIdx);
-      let parsedLinkHelper = eachVal.slice(openSquareIdx + 1, closeSquareIdx);
-      currentObj["link"] = parsedLink;
-      currentObj[currentKey] = parsedLinkHelper;
-      counter+=1;
-      continue;
-    } else {
-      currentObj[currentKey] = eachVal;
+const process =  [
+    {
+      link: 'https://youtu.be/ja-Pr58FCIQ',
+      Title: 'The Next Generation of Developer-First Products',
+      Presenter: 'Zeno Rocha',
+      Duration: '43:41',
+      Date: '5/5/2022'
+    },
+    {
+      link: 'https://youtu.be/ja-Pr58FCIQ',
+      Title: 'The Next Generation of Developer-First Products',
+      Presenter: 'Zeno Rocha',
+      Duration: '43:41',
+      Date: '5/5/2022'
+    },
+    {
+      link: 'https://youtu.be/ja-Pr58FCIQ',
+      Title: 'The Next Generation of Developer-First Products',
+      Presenter: 'Zeno Rocha',
+      Duration: '43:41',
+      Date: '5/5/2022'
+    },
+    {
+      link: 'https://youtu.be/xX5zeVy8Ta4',
+      Title: 'Building DevX Teams',
+      Presenter: 'Cirpo Cinelli',
+      Duration: '42:04',
+      Date: '5/5/2022'
+    },
+    {
+      link: 'https://youtu.be/xX5zeVy8Ta4',
+      Title: 'Building DevX Teams',
+      Presenter: 'Cirpo Cinelli',
+      Duration: '42:04',
+      Date: '5/5/2022'
+    },
+    {
+      link: 'https://youtu.be/xX5zeVy8Ta4',
+      Title: 'Building DevX Teams',
+      Presenter: 'Cirpo Cinelli',
+      Duration: '42:04',
+      Date: '5/5/2022'
+    },
+    {
+      link: 'https://youtu.be/gqnWoh8o36M',
+      Title: 'Things nobody told you about developer experience (DX)',
+      Presenter: 'DX Doctor',
+      Duration: '17:02',
+      Date: '11/23/2019'
+    },
+    {
+      link: 'https://youtu.be/gqnWoh8o36M',
+      Title: 'Things nobody told you about developer experience (DX)',
+      Presenter: 'DX Doctor',
+      Duration: '17:02',
+      Date: '11/23/2019'
+    },
+    {
+      link: 'https://youtu.be/gqnWoh8o36M',
+      Title: 'Things nobody told you about developer experience (DX)',
+      Presenter: 'DX Doctor',
+      Duration: '17:02',
+      Date: '11/23/2019'
+    },
+    {
+      link: 'https://youtu.be/X4NSLo97Az8',
+      Title: 'The only way how to have happy & productive developers',
+      Presenter: 'Vratislav Kalenda',
+      Duration: '25:18',
+      Date: '12/8/2018'
+    },
+    {
+      link: 'https://youtu.be/X4NSLo97Az8',
+      Title: 'The only way how to have happy & productive developers',
+      Presenter: 'Vratislav Kalenda',
+      Duration: '25:18',
+      Date: '12/8/2018'
+    },
+    {
+      link: 'https://youtu.be/X4NSLo97Az8',
+      Title: 'The only way how to have happy & productive developers',
+      Presenter: 'Vratislav Kalenda',
+      Duration: '25:18',
+      Date: '12/8/2018'
+    },
+    {
+      link: 'https://youtu.be/JHtMN8TxUfc',
+      Title: 'The Seven Deadly Sins of Developer Onboarding',
+      Presenter: 'Cristiano Betta',
+      Duration: '28:03',
+      Date: '11/13/2017'
+    },
+    {
+      link: 'https://youtu.be/JHtMN8TxUfc',
+      Title: 'The Seven Deadly Sins of Developer Onboarding',
+      Presenter: 'Cristiano Betta',
+      Duration: '28:03',
+      Date: '11/13/2017'
+    },
+    {
+      link: 'https://youtu.be/JHtMN8TxUfc',
+      Title: 'The Seven Deadly Sins of Developer Onboarding',
+      Presenter: 'Cristiano Betta',
+      Duration: '28:03',
+      Date: '11/13/2017'
+    },
+    {
+      link: 'https://youtu.be/loj3CLHovt0',
+      Title: 'JS UX: Writing code for humans(DX)',
+      Presenter: 'Lea Verou',
+      Duration: '1:09:04',
+      Date: '9/26/2016'
+    },
+    {
+      link: 'https://youtu.be/loj3CLHovt0',
+      Title: 'JS UX: Writing code for humans(DX)',
+      Presenter: 'Lea Verou',
+      Duration: '1:09:04',
+      Date: '9/26/2016'
+    },
+    {
+      link: 'https://youtu.be/loj3CLHovt0',
+      Title: 'JS UX: Writing code for humans(DX)',
+      Presenter: 'Lea Verou',
+      Duration: '1:09:04',
+      Date: '9/26/2016'
+    },
+    {
+      link: 'https://youtu.be/lQdeWHPgoMs',
+      Title: 'The Elements of Developer Experience Design',
+      Presenter: 'Stephen Boak',
+      Duration: '5:24',
+      Date: '8/4/2016'
+    },
+    {
+      link: 'https://youtu.be/lQdeWHPgoMs',
+      Title: 'The Elements of Developer Experience Design',
+      Presenter: 'Stephen Boak',
+      Duration: '5:24',
+      Date: '8/4/2016'
+    },
+    {
+      link: 'https://youtu.be/lQdeWHPgoMs',
+      Title: 'The Elements of Developer Experience Design',
+      Presenter: 'Stephen Boak',
+      Duration: '5:24',
+      Date: '8/4/2016'
     }
-    counter += 1;
+  ]
+  
+const set = new Set(process)
+console.log('SET: ' , set)
+// this haappens due to reference 
+// this is does not apply for the reference type , it works fine for the primitive types 
 
 
-    
-    
-  }
-  result.push(currentObj);
-}
 
-console.log("The result is: ", result);
+const trimmed = tableMarkdown.trim()
+const trimmedSplit = trimmed.split('\n').map(r => r.trim())
 
-const url =
-  "https://api.github.com/repos/workos/awesome-developer-experience/git/blobs/fe28415d2d46ac325a12df8292f7cc005aef57ce";
 
-fetch(url)
-  .then((response) => response.json())
-  .then((data) => {
-    // Retrieve the Base64 encoded content from the response
-    const content = data.content;
-
-    // Decode the Base64 content into a binary string
-    const binaryString = atob(content);
-
-    const firstPipe = binaryString.indexOf("|");
-    let title = "";
-    // this is the trail implementatation for finding the title of the mdx content
-
-    // for (let i = firstPipe - 2; i >= 0; i++) {
-    //   let currentChar = binaryString[i];
-    //   if (currentChar) {
-    //     let c = i;
-
-    //     while (binaryString[c] !== "") {
-    //       title += binaryString[c];
-    //       console.log("Findinf the title : ", title);
-    //       c -= 1;
-    //       if (binaryString[c] === "") {
-    //         break;
-    //       }
-    //     }
-    //   }
-    // }
-    const lineBefore = binaryString.slice(firstPipe - 2, binaryString.length);
-    // console.log("The binary data: ", title);
-
-    const trimmedTableMarkdown = binaryString.trim();
-
-    // Split the table content into rows
-    const rows = trimmedTableMarkdown.split("\n");
-
-    // Extract the table headers from the first row
-    const headers = rows[0]
-      .split("|")
-      .map((header) => header.trim())
-      .filter((header) => header !== "");
-
-    // Extract the table data from the remaining rows
-    const datas = rows.slice(2).map((row) => {
-      const columns = row
-        .split("|")
-        .map((column) => column.trim())
-        .filter((column) => column !== "");
-      const rowData = {};
-      headers.forEach((header, index) => {
-        if (header !== "Website") {
-          rowData[header] = columns[index];
-        } else {
-          const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/;
-          const linkMatch = columns[index].match(linkRegex);
-          if (linkMatch) {
-            rowData["Link"] = {
-              text: linkMatch[1],
-              url: linkMatch[2],
-            };
-          } else {
-            rowData["Link"] = {
-              text: "",
-              url: "",
-            };
-          }
-        }
-      });
-      return rowData;
-    });
-
-    // Convert the table data to JSON format
-    const jsonData = JSON.stringify(datas, null, 2);
-    // console.log('The data is : ' , jsonData)
-
-    // Use the binary string as needed
-
-    // the time to convert the readme file to the actual JSON file
-    // const trimmedTableMarkdown = binaryString.trim();
-    // console.log(Extractor.extractObject(trimmedTableMarkdown, "columns", true));
-
-    // // Split the table content into rows
-    // const rows = trimmedTableMarkdown.split("\n");
-
-    // // Extract the table headers from the first row
-    // const headers = rows[0]
-    //   .split("|")
-    //   .map((header) => header.trim())
-    //   .filter((header) => header !== "");
-
-    // // Extract the table data from the remaining rows
-    // const datas = rows.slice(2).map((row) => {
-    //   const columns = row
-    //     .split("|")
-    //     .map((column) => column.trim())
-    //     .filter((column) => column !== "");
-    //   const rowData = {};
-    //   headers.forEach((header, index) => {
-    //     rowData[header] = columns[index];
-    //   });
-    //   return rowData;
-    // });
-
-    // // Convert the table data to JSON format
-    // const jsonData = JSON.stringify(datas, null, 2);
-
-    // console.log("The json data : ", jsonData);
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-  });
+console.log(trimmedSplit)
