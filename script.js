@@ -15,7 +15,7 @@ const eachRow = trimmed.split('\n')
 
 const headers = eachRow[0].split('|').map((r) => r.trim().toLocaleLowerCase()).filter(r => r!=='')
 
-const the_rest = eachRow.slice(1 , eachRow.length)
+const the_rest = eachRow.slice(2 , eachRow.length)
 
 console.log('The rest of it : ' , the_rest)
 
