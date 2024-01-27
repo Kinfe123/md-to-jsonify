@@ -22,8 +22,13 @@ const headerParser = (row) => {
 const headers = headerParser(eachRow[0])
 
 
+
+const testObj = {}
+testObj['Website'] = 'google.com'
+console.log(testObj , 'The test object')
 const theRest = eachRow.slice(2 , eachRow.length)
 
+const test =  "[Alice's Website](https://example.com/alice)"
 
 const linkFlag = ['https://' , 'http://']
 
@@ -31,8 +36,27 @@ for(eachCol of theRest) {
   
 
   let current_parsed = headerParser(eachCol)
-  for(eachVal of eachCol) {
+  // console.log('the parsed one: ', current_parsed)
+  let counter = 0;
+  let currentObj = {}
+
+  for(eachVal of current_parsed) {
+    console.log("THe value is : " , eachVal , ' and the num is : '  , counter)
+    let currentKey = headers[counter]
+
+    counter += 1
+
+    
      if(eachVal.includes(linkFlag[0]) || eachVal.includes(linkFlag[1])) {
+      if(!currentObj['Website']){
+        let openIdx = eachVal.indexOf('(')
+        let closeIdx = eachVal.indexOf( ")")
+        let parsedLink = eachVal.slice(openIdx + 1 , closeIdx)
+        console.log('The parsded link: ' ,  parsedLink)
+
+        currentObj['Website'] = parsedLink
+        console.log('we aint put anythin ')
+      }
       console.log('I FOUND OEN: ' , eachVal)
      }
   }
