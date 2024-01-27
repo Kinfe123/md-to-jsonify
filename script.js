@@ -12,12 +12,32 @@ const trimmed = tableMarkdown.trim()
 const eachRow = trimmed.split('\n')
 
 
+const headerParser = (row) => {
+  return row[0].split('|').map((r) => r.trim()).filter(r => r!=='')
 
-const headers = eachRow[0].split('|').map((r) => r.trim().toLocaleLowerCase()).filter(r => r!=='')
+}
 
-const the_rest = eachRow.slice(2 , eachRow.length)
 
-console.log('The rest of it : ' , the_rest)
+
+const headers = headerParser(eachRow)
+
+
+const theRest = eachRow.slice(2 , eachRow.length)
+ 
+
+
+const linkFlag = ['https://' , 'http://']
+for(eachCol of theRest) {
+  let current_parsed = headerParser(eachCol)
+  for(eachVal of eachCol) {
+     if(eachVal.includes(linkFlag[0]) || eachVal.includes(linkFlag[1])) {
+      console.log('I FOUND OEN: ' , eachVal)
+     }
+  }
+
+}
+
+
 
 
 
