@@ -1,5 +1,3 @@
-
-
 const tableMarkdown = `
 | Name  | Age | Country | Website            |
 |-------|-----|---------|--------------------|
@@ -7,67 +5,60 @@ const tableMarkdown = `
 | Alice | 30  | Canada  | [Alice's Website](https://example.com/alice) |
 `;
 
-const result = []
-const trimmed = tableMarkdown.trim()
-const eachRow = trimmed.split('\n')
-
+const result = [];
+const trimmed = tableMarkdown.trim();
+const eachRow = trimmed.split("\n");
 
 const headerParser = (row) => {
-  return row.split('|').map((r) => r.trim()).filter(r => r!=='')
+  return row
+    .split("|")
+    .map((r) => r.trim())
+    .filter((r) => r !== "");
+};
 
-}
+const headers = headerParser(eachRow[0]);
 
+const theRest = eachRow.slice(2, eachRow.length);
 
+const test = "[Alice's Website](https://example.com/alice)";
 
-const headers = headerParser(eachRow[0])
+const linkFlag = ["https://", "http://"];
 
+const websiteIdx = headers.indexOf("Website");
 
-
-const testObj = {}
-testObj['Website'] = 'google.com'
-console.log(testObj , 'The test object')
-const theRest = eachRow.slice(2 , eachRow.length)
-
-const test =  "[Alice's Website](https://example.com/alice)"
-
-const linkFlag = ['https://' , 'http://']
-
-for(eachCol of theRest) {
-  
-
-  let current_parsed = headerParser(eachCol)
+for (eachCol of theRest) {
+  let current_parsed = headerParser(eachCol);
   // console.log('the parsed one: ', current_parsed)
   let counter = 0;
-  let currentObj = {}
+  let currentObj = {};
 
-  for(eachVal of current_parsed) {
-    console.log("THe value is : " , eachVal , ' and the num is : '  , counter)
-    let currentKey = headers[counter]
+  for (eachVal of current_parsed) {
+    console.log("THe value is : ", eachVal, " and the num is : ", counter);
+    let currentKey = headers[counter];
+    if (counter !== websiteIdx) {
+      currentObj[currentKey] = eachVal;
+    }
 
-    counter += 1
+    if (
+      websiteIdx === counter &&
+      (eachVal.includes(linkFlag[0]) || eachVal.includes(linkFlag[1]))
+    ) {
+      if (!currentObj["Website"]) {
+        let openIdx = eachVal.indexOf("(");
+        let closeIdx = eachVal.indexOf(")");
+        let parsedLink = eachVal.slice(openIdx + 1, closeIdx);
 
-    
-     if(eachVal.includes(linkFlag[0]) || eachVal.includes(linkFlag[1])) {
-      if(!currentObj['Website']){
-        let openIdx = eachVal.indexOf('(')
-        let closeIdx = eachVal.indexOf( ")")
-        let parsedLink = eachVal.slice(openIdx + 1 , closeIdx)
-        console.log('The parsded link: ' ,  parsedLink)
-
-        currentObj['Website'] = parsedLink
-        console.log('we aint put anythin ')
+        currentObj["Website"] = parsedLink;
       }
-      console.log('I FOUND OEN: ' , eachVal)
-     }
-  }
+      console.log("I FOUND OEN: ", eachVal);
+    }
+    counter += 1;
 
+    result.push(currentObj);
+  }
 }
 
-
-
-
-
-
+console.log("The result is: ", result);
 
 const url =
   "https://api.github.com/repos/workos/awesome-developer-experience/git/blobs/fe28415d2d46ac325a12df8292f7cc005aef57ce";
