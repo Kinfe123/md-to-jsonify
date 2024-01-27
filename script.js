@@ -42,10 +42,26 @@ const tableMarkdown = `
 
 `;
 
+const anotherTableMarkdown = `
+
+| Title                                                                                  | Presenter         | Duration | Date       |
+| -------------------------------------------------------------------------------------- | ----------------- | -------- | ---------- |
+| [The Next Generation of Developer-First Products](https://youtu.be/ja-Pr58FCIQ)                                    | Zeno Rocha     | 43:41    | 5/5/2022   |
+| [Building DevX Teams](https://youtu.be/xX5zeVy8Ta4)                                    | Cirpo Cinelli     | 42:04    | 5/5/2022   |
+| [Things nobody told you about developer experience (DX)](https://youtu.be/gqnWoh8o36M) | DX Doctor         | 17:02    | 11/23/2019 |
+| [The only way how to have happy & productive developers](https://youtu.be/X4NSLo97Az8) | Vratislav Kalenda | 25:18    | 12/8/2018  |
+| [The Seven Deadly Sins of Developer Onboarding](https://youtu.be/JHtMN8TxUfc)          | Cristiano Betta   | 28:03    | 11/13/2017 |
+| [JS UX: Writing code for humans(DX)](https://youtu.be/loj3CLHovt0)                         | Lea Verou         | 1:09:04  | 9/26/2016  |
+| [The Elements of Developer Experience Design](https://youtu.be/lQdeWHPgoMs)       | Stephen Boak      | 5:24     | 8/4/2016   |
+
+
+
+
+`;
 // this will be for mocking the api blob response from readme file
 
 const result = [];
-const trimmed = tableMarkdown.trim();
+const trimmed = anotherTableMarkdown.trim();
 const eachRow = trimmed.split("\n");
 
 const headerParser = (row) => {
@@ -74,22 +90,25 @@ for (eachCol of theRest) {
   for (eachVal of current_parsed) {
     let currentKey = headers[counter];
 
-  
     if (eachVal.includes(linkFlag[0]) || eachVal.includes(linkFlag[1])) {
-      if (!currentObj["Website"]) {
-        let openIdx = eachVal.indexOf("(");
-        let openSquareIdx = eachVal.indexOf("[");
-        let closeIdx = eachVal.indexOf(")");
-        let closeSquareIdx = eachVal.indexOf("]");
+      let openSquareIdx = eachVal.indexOf("[");
+      let closeSquareIdx = eachVal.indexOf("]");
+      const add = (eachVal.length - closeSquareIdx)
+      let openIdx = eachVal.slice(closeSquareIdx , eachVal.length).indexOf("(") + closeSquareIdx;
+      let closeIdx = eachVal.slice(closeSquareIdx , eachVal.length).indexOf(")") + closeSquareIdx;
+      // we have to identify the link even if there exit () in link helper
+        
 
-        let parsedLink = eachVal.slice(openIdx + 1, closeIdx);
-        let parsedLinkHelper = eachVal.slice(openSquareIdx + 1, closeSquareIdx);
-        console.log(parsedLink, parsedLinkHelper);
-        currentObj["link"] = parsedLink;
-        currentObj[currentKey]= parsedLinkHelper;
-      }
-    
-    }else {
+      console.log('the open adn closed parathesis: ' , closeIdx , openIdx)
+
+      let parsedLink = eachVal.slice(openIdx + 1, closeIdx);
+      let parsedLinkHelper = eachVal.slice(openSquareIdx + 1, closeSquareIdx);
+      console.log(parsedLink, parsedLinkHelper);
+      currentObj["link"] = parsedLink;
+      currentObj[currentKey] = parsedLinkHelper;
+      counter+=1;
+      continue;
+    } else {
       currentObj[currentKey] = eachVal;
     }
     counter += 1;
@@ -98,7 +117,7 @@ for (eachCol of theRest) {
   }
 }
 
-console.log("The result is: ", result[0]['Founded Year']);
+console.log("The result is: ", result);
 
 const url =
   "https://api.github.com/repos/workos/awesome-developer-experience/git/blobs/fe28415d2d46ac325a12df8292f7cc005aef57ce";
