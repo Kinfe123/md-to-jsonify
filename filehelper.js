@@ -24,4 +24,3 @@ export function getFileAsString(filePath) {
     });
   });
 }
-
