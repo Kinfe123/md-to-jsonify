@@ -1,7 +1,7 @@
 import fs from "fs";
 import { getFileAsString } from "./filehelper.js";
 
-const res = [];
+
 export const extract = async  (filePath) => {
   let result = [];
   let str = await getFileAsString('readme.md')
@@ -15,10 +15,6 @@ export const extract = async  (filePath) => {
 
 function processIt(rawData, res) {
   const result = [];
-  // const res = [];/
-
-
-  
 
   const trimmed = rawData.trim();
   const eachRow = trimmed.split("\n");
@@ -36,7 +32,6 @@ function processIt(rawData, res) {
 
   const linkFlag = ["https://", "http://"];
 
-  // const websiteIdx = headers.indexOf("Website");
 
   for (let eachCol of theRest) {
     let current_parsed = headerParser(eachCol);
@@ -97,24 +92,7 @@ fetch(url)
     const binaryString = atob(content);
 
     const firstPipe = binaryString.indexOf("|");
-    let title = "";
-    // this is the trail implementatation for finding the title of the mdx content
-
-    // for (let i = firstPipe - 2; i >= 0; i++) {
-    //   let currentChar = binaryString[i];
-    //   if (currentChar) {
-    //     let c = i;
-
-    //     while (binaryString[c] !== "") {
-    //       title += binaryString[c];
-    //       console.log("Findinf the title : ", title);
-    //       c -= 1;
-    //       if (binaryString[c] === "") {
-    //         break;
-    //       }
-    //     }
-    //   }
-    // }
+    
     const lineBefore = binaryString.slice(firstPipe - 2, binaryString.length);
     // console.log("The binary data: ", title);
 
