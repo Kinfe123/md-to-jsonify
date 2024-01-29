@@ -73,8 +73,8 @@ export const extractFromLink = async (link) => {
   const content = await response.content;
   const binaryString = await atob(content);
   const result = processIt(binaryString, []);
+  
   return result 
-  console.log('The result for the link : ' , result )
 
 
   
