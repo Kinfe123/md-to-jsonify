@@ -73,8 +73,6 @@ function processIt(rawData, res) {
  return result
 
 }
-const test = await extract("readme.md");
-console.log("The test data ",test );
 
 const extractLink = async () => {
 
