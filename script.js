@@ -1,84 +1,90 @@
-const fs = require("fs");
-
+import fs from "fs";
+import { getFileAsString } from "./filehelper.js";
 var tableMarkdown = ``;
 
-export const extract = (filePath) => {
-
-  const result = []
-  fs.readFile("readme.md", "utf-8", (err, tableMarkdown) => {
-    if (err) {
-      console.log("Error has occured", err);
-      return;
-    }
-
-    // this will be for mocking the api blob response from readme file
-
-   
-    const trimmed = tableMarkdown.trim();
-    const eachRow = trimmed.split("\n");
-
-    const headerParser = (row) => {
-      return row
-        .split("|")
-        .map((r) => r.trim())
-        .filter((r) => r !== "");
-    };
-
-    const headers = headerParser(eachRow[0]);
-
-    const theRest = eachRow.slice(2, eachRow.length);
-
-    const test = "[Alice's Website](https://example.com/alice)";
-
-    const linkFlag = ["https://", "http://"];
-
-    // const websiteIdx = headers.indexOf("Website");
-
-    for (eachCol of theRest) {
-      let current_parsed = headerParser(eachCol);
-
-      let counter = 0;
-      let currentObj = {};
-
-      for (eachVal of current_parsed) {
-        let currentKey = headers[counter];
-
-        if (eachVal.includes(linkFlag[0]) || eachVal.includes(linkFlag[1])) {
-          let openSquareIdx = eachVal.indexOf("[");
-          let closeSquareIdx = eachVal.indexOf("]");
-          const add = eachVal.length - closeSquareIdx;
-          let openIdx =
-            eachVal.slice(closeSquareIdx, eachVal.length).indexOf("(") +
-            closeSquareIdx;
-          let closeIdx =
-            eachVal.slice(closeSquareIdx, eachVal.length).indexOf(")") +
-            closeSquareIdx;
-          // we have to identify the link even if there exit () in link helper
-
-          let parsedLink = eachVal.slice(openIdx + 1, closeIdx);
-          let parsedLinkHelper = eachVal.slice(
-            openSquareIdx + 1,
-            closeSquareIdx
-          );
-          currentObj["link"] = parsedLink;
-          currentObj[currentKey] = parsedLinkHelper;
-          counter += 1;
-          continue;
-        } else {
-          currentObj[currentKey] = eachVal;
-        }
-        counter += 1;
-      }
-      result.push(currentObj);
-    }
-  });
+let rawData = "";
+var globalres = [];
+const res = [];
+export const extract = async  (filePath) => {
+  let result = [];
+  let str = await getFileAsString('readme.md')
+  result = processIt(str , [])
   return result
+    
+    
+  
+
 };
 
-console.log("The result is: ", result);
+function processIt(rawData, res) {
+  const result = [];
+  // const res = [];/
 
+
+  
+
+  const trimmed = rawData.trim();
+  const eachRow = trimmed.split("\n");
+
+  const headerParser = (row) => {
+    return row
+      .split("|")
+      .map((r) => r.trim())
+      .filter((r) => r !== "");
+  };
+
+  const headers = headerParser(eachRow[0]);
+
+  const theRest = eachRow.slice(2, eachRow.length);
+
+  const linkFlag = ["https://", "http://"];
+
+  // const websiteIdx = headers.indexOf("Website");
+
+  for (let eachCol of theRest) {
+    let current_parsed = headerParser(eachCol);
+    let currentObj = {};
+
+    let counter = 0;
+
+    for (let eachVal of current_parsed) {
+      let currentKey = headers[counter];
+
+      if (eachVal.includes(linkFlag[0]) || eachVal.includes(linkFlag[1])) {
+        let openSquareIdx = eachVal.indexOf("[");
+        let closeSquareIdx = eachVal.indexOf("]");
+        const add = eachVal.length - closeSquareIdx;
+        let openIdx =
+          eachVal.slice(closeSquareIdx, eachVal.length).indexOf("(") +
+          closeSquareIdx;
+        let closeIdx =
+          eachVal.slice(closeSquareIdx, eachVal.length).indexOf(")") +
+          closeSquareIdx;
+        // we have to identify the link even if there exit () in link helper
+
+        let parsedLink = eachVal.slice(openIdx + 1, closeIdx);
+        let parsedLinkHelper = eachVal.slice(openSquareIdx + 1, closeSquareIdx);
+        currentObj["link"] = parsedLink;
+        currentObj[currentKey] = parsedLinkHelper;
+        counter += 1;
+        continue;
+      } else {
+        currentObj[currentKey] = eachVal;
+      }
+      counter += 1;
+    }
+    result.push(JSON.stringify(currentObj));
+
+    res.push(currentObj);
+  
+  }
+ return result
+
+}
+const test = await extract("readme.md");
+console.log("The test data ", );
 const url =
-  "https://api.github.com/repos/workos/awesome-developer-experience/git/blobs/fe28415d2d46ac325a12df8292f7cc005aef57ce";
+  "https://api.ithub.com/repos/workos/awesome-developer-experience/git/blobs/fe28415d2d46ac325a12df8292f7cc005aef57ce";
 
 fetch(url)
   .then((response) => response.json())
