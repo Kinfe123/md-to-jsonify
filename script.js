@@ -74,7 +74,7 @@ function processIt(rawData, res) {
 
 }
 
-const extractLink = async () => {
+const extractFromLink = async () => {
 
 
 const url =
