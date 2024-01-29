@@ -3,6 +3,8 @@ const fs = require("fs");
 var tableMarkdown = ``;
 
 export const extract = (filePath) => {
+
+  const result = []
   fs.readFile("readme.md", "utf-8", (err, tableMarkdown) => {
     if (err) {
       console.log("Error has occured", err);
@@ -11,7 +13,7 @@ export const extract = (filePath) => {
 
     // this will be for mocking the api blob response from readme file
 
-    const result = [];
+   
     const trimmed = tableMarkdown.trim();
     const eachRow = trimmed.split("\n");
 
@@ -70,6 +72,7 @@ export const extract = (filePath) => {
       result.push(currentObj);
     }
   });
+  return result
 };
 
 console.log("The result is: ", result);
