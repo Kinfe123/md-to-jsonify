@@ -1,9 +1,6 @@
 import fs from "fs";
 import { getFileAsString } from "./filehelper.js";
-var tableMarkdown = ``;
 
-let rawData = "";
-var globalres = [];
 const res = [];
 export const extract = async  (filePath) => {
   let result = [];
@@ -82,7 +79,11 @@ function processIt(rawData, res) {
 
 }
 const test = await extract("readme.md");
-console.log("The test data ", );
+console.log("The test data ",test );
+
+const extractLink = async () => {
+
+
 const url =
   "https://api.ithub.com/repos/workos/awesome-developer-experience/git/blobs/fe28415d2d46ac325a12df8292f7cc005aef57ce";
 
@@ -197,3 +198,5 @@ fetch(url)
   .catch((error) => {
     console.error("Error:", error);
   });
+
+}
