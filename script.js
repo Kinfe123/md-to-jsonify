@@ -78,7 +78,7 @@ const extractLink = async () => {
 
 
 const url =
-  "https://api.ithub.com/repos/workos/awesome-developer-experience/git/blobs/fe28415d2d46ac325a12df8292f7cc005aef57ce";
+  "https://api.github.com/repos/workos/awesome-developer-experience/git/blobs/fe28415d2d46ac325a12df8292f7cc005aef57ce";
 
 fetch(url)
   .then((response) => response.json())
