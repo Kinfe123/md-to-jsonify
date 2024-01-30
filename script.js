@@ -77,7 +77,6 @@ export const extractFromLink = async (link) => {
   return result 
 
 
-  
 };
 
 const extractFromLink1 = async () => {
