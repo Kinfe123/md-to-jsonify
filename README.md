@@ -13,7 +13,6 @@ npm i md-to-jsonify
 
 ## Usage 
 
-
 ```jsx 
 import {extract , extractFromLink} from 'md-to-jsonify'
 
@@ -26,12 +25,11 @@ console.log('JSON data is : ' , result)
 
 
 // extracting from the link from github public api url 
-
 const apiUrl = "https://api.github.com/repos/workos/awesome-developer-experience/git/blobs/{sha}"
-// the wau tp get the sha is by goind to the url - https://api.github.com/repos/workos/awesome-developer-experience/git/trees/master
+// the way to get the this is by going to the url - https://api.github.com/repos/workos/awesome-developer-experience/git/trees/master
 // from the above link you will get teh sha from the endpiont 
 
-const result = await exteactFromLink(apiUrl)
+const result = await extractFromLink(apiUrl)
 console.log('JSON data is: ' , result)
 ```
 ## Output
