@@ -37,7 +37,8 @@ console.log('JSON data is: ' , result)
 ```
 ## Output
 
-```json[
+```json
+[
   `{"Name":"John","Age":"25","Country":"USA","link":"https://example.com/john","Website":"John's Website"}`,
   `{"Name":"Alice","Age":"30","Country":"Canada","link":"https://example.com/alice","Website":"Alice's Website"}`
 ]
