@@ -1,11 +1,47 @@
+# md-to-jsonify 
+ 
+is npm package that he;ps you get the json data format out any data format like table , maps , anything that can be stored on key values pair for a sake of implementation.
+
+
+## Installation
+
+```bash 
+npm i md-to-jsonify
+```
 
 
 
+## Usage 
 
 
-| Name  | Age | Country | Website            |
-|-------|-----|---------|--------------------|
-| John  | 25  | USA     | [John's Website](https://example.com/john) |
-| Alice | 30  | Canada  | [Alice's Website](https://example.com/alice) |
+
+```jsx 
+import {extract , extractFromLink} from 'md-to-jsonify'
+
+
+// extracting from the relative path in file system
+const filepath = 'path/to/something.md'
+const result = await extract(filepath)
+console.log('JSON data is : ' , result)
+
+
+
+// extracting from the link from github public api url 
+
+const apiUrl = '"https://api.github.com/repos/workos/awesome-developer-experience/git/blobs/{sha}'
+// the wau tp get the sha is by goind to the url - https://api.github.com/repos/workos/awesome-developer-experience/git/trees/master
+// from the above link you will get teh sha from the endpiont 
+
+const result = await exteactFromLink(apiUrl)
+console.log('JSON data is: ' , result)
+```
+
+## Features 
+
+
+
+## Contribution 
+
+I really welcome any individual who wants to participate and contribute on this project to make more stable , raise an issue and let discuss on them or send pr , i will review it anyways
 
 
