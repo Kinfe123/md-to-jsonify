@@ -14,7 +14,6 @@ npm i md-to-jsonify
 ## Usage 
 
 
-
 ```jsx 
 import {extract , extractFromLink} from 'md-to-jsonify'
 
