@@ -35,6 +35,14 @@ const apiUrl = "https://api.github.com/repos/workos/awesome-developer-experience
 const result = await exteactFromLink(apiUrl)
 console.log('JSON data is: ' , result)
 ```
+## Output
+
+```json[
+  `{"Name":"John","Age":"25","Country":"USA","link":"https://example.com/john","Website":"John's Website"}`,
+  `{"Name":"Alice","Age":"30","Country":"Canada","link":"https://example.com/alice","Website":"Alice's Website"}`
+]
+```
+
 
 ## Features 
 
