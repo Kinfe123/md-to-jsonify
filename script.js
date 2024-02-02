@@ -139,40 +139,7 @@ const extractFromLink1 = async () => {
 
       // Convert the table data to JSON format
       const jsonData = JSON.stringify(datas, null, 2);
-      // console.log('The data is : ' , jsonData)
-
-      // Use the binary string as needed
-
-      // the time to convert the readme file to the actual JSON file
-      // const trimmedTableMarkdown = binaryString.trim();
-      // console.log(Extractor.extractObject(trimmedTableMarkdown, "columns", true));
-
-      // // Split the table content into rows
-      // const rows = trimmedTableMarkdown.split("\n");
-
-      // // Extract the table headers from the first row
-      // const headers = rows[0]
-      //   .split("|")
-      //   .map((header) => header.trim())
-      //   .filter((header) => header !== "");
-
-      // // Extract the table data from the remaining rows
-      // const datas = rows.slice(2).map((row) => {
-      //   const columns = row
-      //     .split("|")
-      //     .map((column) => column.trim())
-      //     .filter((column) => column !== "");
-      //   const rowData = {};
-      //   headers.forEach((header, index) => {
-      //     rowData[header] = columns[index];
-      //   });
-      //   return rowData;
-      // });
-
-      // // Convert the table data to JSON format
-      // const jsonData = JSON.stringify(datas, null, 2);
-
-      // console.log("The json data : ", jsonData);
+  
     })
     .catch((error) => {
       console.error("Error:", error);
