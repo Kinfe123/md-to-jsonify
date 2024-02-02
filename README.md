@@ -4,6 +4,23 @@ is npm package that helps you get the json data format out any data format like 
 
 
 You can find the full docs [here](https://md-jsonify.vercel.app)
+## Features 
+
+It comes with the following features out of the box and some unfinished tasks:
+
+
+- [x]  Write content using MDX.
+- [x]  Transform and validate content.
+- [x]  Optimize the iteration for converting the data.
+- [x]  Split out link in separate data feilds with ```link``` property.
+- [x]  Passed multiple edgecase for symbols that does have a meaning on markdown like ```[]``` , ```()```.
+- [x]  Numbering the links - ```linkX``` , while X being the number of links with a given row.
+- [x]  More is comming like - parsing the convetable data's from the entire md file 
+
+- [ ]  Parsing the table and other data format from md containing other stuff not only the data contents.
+- [ ]  Custom Playground for testing out the stuff.
+- [ ]  Integrating with AI for curation.
+
 
 ## Installation
 
