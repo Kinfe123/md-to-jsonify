@@ -51,9 +51,6 @@ console.log('JSON data is : ' , result)
 
 
 
-import {extract , extractFromLink} from 'md-to-jsonify'
-
-
 // extracting from the relative path in file system
 const filepath = 'path/to/something.md'
 const result = await extract(filepath)
