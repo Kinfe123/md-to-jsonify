@@ -1,12 +1,9 @@
 import fs from "fs";
 import { getFileAsString } from "./filehelper.js";
 
-export const extract = async (filePath) => {
-  let result = [];
-  let str = await getFileAsString("readme.md");
-  result = processIt(str, []);
-  return result;
-};
+
+
+
 
 function processIt(rawData, res) {
   const result = [];
@@ -59,11 +56,23 @@ function processIt(rawData, res) {
       }
       counter += 1;
     }
-    result.push(JSON.stringify(currentObj));
+    result.push(currentObj);
 
-    res.push(currentObj);
+    // res.push(currentObj);
   }
   return result;
+}
+
+
+export const extract = async (filePath) => {
+  let result = [];
+  let str = await getFileAsString("readme.md");
+  result = processIt(str, []);
+  return result;
+};
+export const extractFromString = (mdString) => {
+  const result = processIt(mdString)
+  return result
 }
 
 export const extractFromLink = async (link) => {

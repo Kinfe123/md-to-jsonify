@@ -16,9 +16,9 @@ It comes with the following features out of the box and some unfinished tasks:
 - [x]  Passed multiple edgecase for symbols that does have a meaning on markdown like ```[]``` , ```()```.
 - [x]  Numbering the links - ```linkX``` , while X being the number of links with a given row.
 - [x]  More is comming like - parsing the convetable data's from the entire md file 
+- [x]  Custom Playground for testing out the stuff.
 
 - [ ]  Parsing the table and other data format from md containing other stuff not only the data contents.
-- [ ]  Custom Playground for testing out the stuff.
 - [ ]  Integrating with AI for curation.
 
 
@@ -33,6 +33,24 @@ npm i md-to-jsonify
 ## Usage 
 
 ```jsx 
+
+
+//extracting from markdown string
+import {extract ,extractFromString , extractFromLink} from 'md-to-jsonify'
+
+const result = extractFromString(markdownTable)
+console.log('The JSON data : ' , result)
+
+
+
+// extracting from the relative path in file system
+const filepath = 'path/to/something.md'
+const result = await extract(filepath)
+console.log('JSON data is : ' , result)
+
+
+
+
 import {extract , extractFromLink} from 'md-to-jsonify'
 
 
