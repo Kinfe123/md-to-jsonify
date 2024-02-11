@@ -62,7 +62,12 @@ function processIt(rawData, res) {
   }
   return result;
 }
+const prune = (mdString) => {
+  const findPipe = mdString.includes('|')
+  return findPipe
+  
 
+}
 
 export const extract = async (filePath) => {
   let result = [];
@@ -71,8 +76,17 @@ export const extract = async (filePath) => {
   return result;
 };
 export const extractFromString = (mdString) => {
-  const result = processIt(mdString)
-  return result
+  const pipeValid = prune(mdString)
+  
+  if(pipeValid){
+
+    const result = processIt(mdString)
+    return result 
+  
+  }else {
+    return []
+  }
+  
 }
 
 export const extractFromLink = async (link) => {
