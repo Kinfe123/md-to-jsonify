@@ -30,25 +30,24 @@ const theMinMdTable = `
 
 
 
-const prune = (mdString) => {
+// const prune = (mdString) => {
 
-  const findPipe = mdString.includes('|')
-  const st =  mdString.toString()
-  let pipes = 0;
-  let bars = 0;
-  for(let s of st) {
-   if(s === '|') pipes+=1;
-   if(s === '-') bars+=1; 
-  }
+//   const findPipe = mdString.includes('|')
+//   const st =  mdString.toString()
+//   let pipes = 0;
+//   let bars = 0;
+//   for(let s of st) {
+//    if(s === '|') pipes+=1;
+//    if(s === '-') bars+=1; 
+//   }
 
-  console.log(pipes , bars)
+//   console.log(pipes , bars)
   
   
 
-// console.log('pipelenght : ' , pipelenght.length)
-  
 
-}
-const result = extractFromString(theMinMdTable)
-prune(theMinMdTable)
-console.log(result)
+
+// }
+// const result = extractFromString(theMinMdTable)
+// prune(theMinMdTable)
+// console.log(result)
