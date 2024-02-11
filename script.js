@@ -64,7 +64,20 @@ function processIt(rawData, res) {
 }
 const prune = (mdString) => {
   const findPipe = mdString.includes('|')
-  return findPipe
+  const mdStingify = mdString.toString()
+  let pipes = 0
+  let bars = 0
+  for(let str of mdStingify){
+    if(str === '|') pipes+=1;
+    if(str === '-') bars+=1;
+
+  }
+  let passThreshold = false;
+
+  if( pipes >= 6 && bars >= 7){
+    passThreshold = true;
+  }
+  return findPipe && passThreshold
   
 
 }

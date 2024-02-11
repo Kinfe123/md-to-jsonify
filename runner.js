@@ -5,30 +5,50 @@ import { extract, extractFromString,  extractFromLink } from "./script.js";
 // const data = await extractFromLink(url);
 
 
-// const markdownTable = `
-// | Name  | Age | Website                |
-// |-------|-----|------------------------|
-// | John  | 25  | [Example Website 1](https://example.com) |
-// | Alice | 30  | [Example Website 2](https://example.org) |
-// `;
+const markdownTable = `
+| Name  | Age | Website                |
+|-------|-----|------------------------|
+| John  | 25  | [Example Website 1](https://example.com) |
+| Alice | 30  | [Example Website 2](https://example.org) |
+`;
+const theMinMdTable = `
+| Name  | 
+|-------|
+| John  | 
+
+`;
+ 
  
 
 
-const  markdownTable = `
-some really happends and 
-i dont understand it well but i always try
-somehow new but strange
-`
+// const  markdownTable = `
+// some really happends and 
+// i dont understand it well but i always try
+// somehow new but strange
+// `
+
 
 
 
 const prune = (mdString) => {
-  const findPipe = mdString.includes('|')
 
-  return findPipe
+  const findPipe = mdString.includes('|')
+  const st =  mdString.toString()
+  let pipes = 0;
+  let bars = 0;
+  for(let s of st) {
+   if(s === '|') pipes+=1;
+   if(s === '-') bars+=1; 
+  }
+
+  console.log(pipes , bars)
+  
+  
+
+// console.log('pipelenght : ' , pipelenght.length)
   
 
 }
-const result = extractFromString(markdownTable)
-prune(markdownTable)
+const result = extractFromString(theMinMdTable)
+prune(theMinMdTable)
 console.log(result)
