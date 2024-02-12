@@ -1,9 +1,4 @@
-
 import { getFileAsString } from "./filehelper.js";
-
-
-
-
 
 function processIt(rawData, res) {
   const result = [];
@@ -63,81 +58,73 @@ function processIt(rawData, res) {
   return result;
 }
 const prune = (mdString) => {
-  const findPipe = mdString.includes('|')
-  const mdStingify = mdString.toString()
-  let pipes = 0
-  let bars = 0
-  for(let str of mdStingify){
-    if(str === '|') pipes+=1;
-    if(str === '-') bars+=1;
-
+  const findPipe = mdString.includes("|");
+  const mdStingify = mdString.toString();
+  let pipes = 0;
+  let bars = 0;
+  for (let str of mdStingify) {
+    if (str === "|") pipes += 1;
+    if (str === "-") bars += 1;
   }
   let passThreshold = false;
 
-  if( pipes >= 6 && bars >= 7){
+  if (pipes >= 6 && bars >= 7) {
     passThreshold = true;
   }
-  return findPipe && passThreshold
-  
-
-}
-
-
-
+  return findPipe && passThreshold;
+};
 
 export const extract = async (filePath) => {
   let result = [];
   let str = await getFileAsString(filePath);
-  result = processIt(str, []);
+  let valid = prune(str);
+  if (valid) {
+    result = processIt(str, []);
+  }
+
   return result;
 };
 export const extractFromString = (mdString) => {
-  const pipeValid = prune(mdString)
-  
-  if(pipeValid){
+  const pipeValid = prune(mdString);
 
-    const result = processIt(mdString)
-    return result 
-  
-  }else {
-    return []
+  if (pipeValid) {
+    const result = processIt(mdString);
+    return result;
+  } else {
+    return [];
   }
-  
-}
-export const  extractTables = (markdown)  => {
+};
+export const extractTables = (markdown) => {
   const tableRegex = /\|.*\|\n((?:\|.*\|\n)+)/g;
   const tables = [];
-  
+
   let match;
-  let str = ''
+  let str = "";
 
   while ((match = tableRegex.exec(markdown)) !== null) {
     // console.log(match)
-    for(let x of match) {
-
-    
-      tables.push(x.trim())
-     
+    for (let x of match) {
+      tables.push(x.trim());
     }
-    tables.pop()
+    tables.pop();
   }
-  const result = extractFromString(tables[0].trim())
-  
-  
+  const result = extractFromString(tables[0].trim());
 
- return result
-}
+  return result;
+};
 export const extractFromLink = async (link) => {
-  
   const res = await fetch(link);
   const response = await res.json();
   const content = await response.content;
   const binaryString = await atob(content);
-  const result = processIt(binaryString, []);
-  
-  return result 
+  let valid = prune(binaryString);
+  let result = [];
 
+  if (valid) {
+    result = processIt(binaryString, []);
+  }
 
+  return result;
 };
 
 const extractFromLink1 = async () => {
@@ -200,7 +187,6 @@ const extractFromLink1 = async () => {
 
       // Convert the table data to JSON format
       const jsonData = JSON.stringify(datas, null, 2);
-  
     })
     .catch((error) => {
       console.error("Error:", error);
