@@ -1,4 +1,4 @@
-import fs from "fs";
+
 import { getFileAsString } from "./filehelper.js";
 
 
@@ -62,19 +62,71 @@ function processIt(rawData, res) {
   }
   return result;
 }
+const prune = (mdString) => {
+  const findPipe = mdString.includes('|')
+  const mdStingify = mdString.toString()
+  let pipes = 0
+  let bars = 0
+  for(let str of mdStingify){
+    if(str === '|') pipes+=1;
+    if(str === '-') bars+=1;
+
+  }
+  let passThreshold = false;
+
+  if( pipes >= 6 && bars >= 7){
+    passThreshold = true;
+  }
+  return findPipe && passThreshold
+  
+
+}
+
+
 
 
 export const extract = async (filePath) => {
   let result = [];
-  let str = await getFileAsString("readme.md");
+  let str = await getFileAsString(filePath);
   result = processIt(str, []);
   return result;
 };
 export const extractFromString = (mdString) => {
-  const result = processIt(mdString)
-  return result
-}
+  const pipeValid = prune(mdString)
+  
+  if(pipeValid){
 
+    const result = processIt(mdString)
+    return result 
+  
+  }else {
+    return []
+  }
+  
+}
+export const  extractTables = (markdown)  => {
+  const tableRegex = /\|.*\|\n((?:\|.*\|\n)+)/g;
+  const tables = [];
+  
+  let match;
+  let str = ''
+
+  while ((match = tableRegex.exec(markdown)) !== null) {
+    // console.log(match)
+    for(let x of match) {
+
+    
+      tables.push(x.trim())
+     
+    }
+    tables.pop()
+  }
+  const result = extractFromString(tables[0].trim())
+  
+  
+
+ return result
+}
 export const extractFromLink = async (link) => {
   
   const res = await fetch(link);
