@@ -68,6 +68,10 @@ More text...
 `;
 const result = extractFromFull(markDownString)
 console.log("The JSON data: " ,result  ) 
+
+
+
+
 // extracting from the relative path in file system
 const filepath = 'path/to/something.md'
 const result = await extract(filepath)
