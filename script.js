@@ -94,7 +94,7 @@ export const extractFromString = (mdString) => {
     return [];
   }
 };
-export const extractTables = (markdown) => {
+export const extractFromFull = (markdown) => {
   const tableRegex = /\|.*\|\n((?:\|.*\|\n)+)/g;
   const tables = [];
 
@@ -102,13 +102,18 @@ export const extractTables = (markdown) => {
   let str = "";
 
   while ((match = tableRegex.exec(markdown)) !== null) {
-    // console.log(match)
+    // extracting each rows and pushing them to be processed
     for (let x of match) {
       tables.push(x.trim());
     }
     tables.pop();
   }
-  const result = extractFromString(tables[0].trim());
+  const result = []
+  for(let each of tables){
+    result.push(extractFromString(each))
+
+  }
+  
 
   return result;
 };
