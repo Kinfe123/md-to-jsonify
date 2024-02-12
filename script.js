@@ -82,6 +82,9 @@ const prune = (mdString) => {
 
 }
 
+
+
+
 export const extract = async (filePath) => {
   let result = [];
   let str = await getFileAsString("readme.md");
@@ -101,7 +104,29 @@ export const extractFromString = (mdString) => {
   }
   
 }
+export const  extractTables = (markdown)  => {
+  const tableRegex = /\|.*\|\n((?:\|.*\|\n)+)/g;
+  const tables = [];
+  
+  let match;
+  let str = ''
 
+  while ((match = tableRegex.exec(markdown)) !== null) {
+    // console.log(match)
+    for(let x of match) {
+
+    
+      tables.push(x.trim())
+     
+    }
+    tables.pop()
+  }
+  const result = extractFromString(tables[0].trim())
+  
+  
+
+ return result
+}
 export const extractFromLink = async (link) => {
   
   const res = await fetch(link);
