@@ -1,4 +1,4 @@
-import { extract, extractFromString,  extractFromLink  , extractTables} from "./script.js";
+import { extract, extractFromString,  extractFromLink  , extractFromFull} from "./script.js";
 
 // const url =
 //   "https://api.github.com/repos/Kinfe123/md-to-json-based-api/git/blobs/9ce4bf952d956457f11c5937ce189aff6270f63c";
@@ -100,8 +100,13 @@ Some text...
 
 | Name  | Age | Email             |
 |-------|-----|-------------------|
-| John  | 25  | john@example.com  |
-| Alice | 30  | alice@example.com |
+| Chandler  | 25  | john@example.com  |
+| Rose | 30  | alice@example.com |
+| Joey | 30  | alice@example.com |
+| Monica | 30  | alice@example.com |
+| Pheobe | 30  | alice@example.com |
+| Rachel | 30  | alice@example.com |
+| Chandler | 30  | alice@example.com |
 
 More text...
 
@@ -128,7 +133,7 @@ More text...
 // }
 
 // Extract tables from Markdown
-const extractedTables = extractTables(markdown);
+const extractedTables = extractFromFull(markdown);
 
 // Log the extracted tables
-console.log('THE TBALE IS : ', extractedTables)
+console.log('The result is : ', extractedTables)
