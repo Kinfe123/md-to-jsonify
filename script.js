@@ -1,4 +1,4 @@
-import fs from "fs";
+
 import { getFileAsString } from "./filehelper.js";
 
 
@@ -87,7 +87,7 @@ const prune = (mdString) => {
 
 export const extract = async (filePath) => {
   let result = [];
-  let str = await getFileAsString("readme.md");
+  let str = await getFileAsString(filePath);
   result = processIt(str, []);
   return result;
 };

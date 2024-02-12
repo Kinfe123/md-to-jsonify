@@ -131,4 +131,4 @@ More text...
 const extractedTables = extractTables(markdown);
 
 // Log the extracted tables
-console.log('tHE TBALE IS : ', extractedTables)
+console.log('THE TBALE IS : ', extractedTables)
