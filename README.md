@@ -18,7 +18,7 @@ It comes with the following features out of the box and some unfinished tasks:
 - [x]  More is comming like - parsing the convetable data's from the entire md file 
 - [x]  Custom Playground for testing out the stuff.
 
-- [ ]  Parsing the table and other data format from md containing other stuff not only the data contents.
+- [x]  Parsing the table and other data format from md containing other stuff not only the data contents.
 - [ ]  Integrating with AI for curation.
 
 
